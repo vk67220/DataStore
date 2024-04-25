@@ -2,7 +2,9 @@ pipeline {
   agent any
    stages {
      stage("checkout") {
-       checkout scmGit(branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/shivagande26/DataStore.git']])
+       steps {
+         checkout scmGit(branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/shivagande26/DataStore.git']])
+       }
      }
    }
 }
