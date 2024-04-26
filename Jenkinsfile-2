@@ -47,7 +47,7 @@ pipeline {
       steps {
         sh """
           echo "-------- Scanning Docker Image --------"
-          trivy image scan datastore:"${App_Version}"
+          trivy image datastore:"${App_Version}"
           echo "-------- Scanning Docker Image Complete --------"
         """
       }
