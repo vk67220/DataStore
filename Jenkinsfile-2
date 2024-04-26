@@ -33,11 +33,6 @@ pipeline {
         """
       }
     }
-    stage("acceptance") {
-      steps {
-        input 'Proceed'
-      }
-    }
     stage("building docker image") {
       steps {
         sh """
@@ -85,6 +80,11 @@ pipeline {
            docker image prune -a -f
            echo "-------- Clean Up Successful --------"
         """
+      }
+    }
+    stage("acceptance") {
+      steps {
+        input 'Trigger Down Stream Job'
       }
     }
     stage("triggering deployment job") {
