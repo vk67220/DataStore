@@ -87,5 +87,10 @@ pipeline {
         """
       }
     }
+    stage("triggering deployment job") {
+      steps {
+        build job: "KubernetesDeployment", parameters: [string(name: "App_Name", value: "datastore"), string(name: "App_Version", value: "${params.App_Version}")]
+      }
+    }
   }
 }
