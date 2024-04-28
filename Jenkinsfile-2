@@ -16,14 +16,6 @@ pipeline {
         checkout scmGit(branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/shivagande26/DataStore.git']])
       }
     }
-    stage("static code analisys") {
-      steps{
-        script {
-          def SonarQubecredentialsId = 'sonarqube'
-          staticCodeAnalysis(SonarQubecredentialsId)
-        }
-      }
-    }
     stage("building application") {
       steps {
         sh """
@@ -41,6 +33,14 @@ pipeline {
           echo "-------- Testcases Execution Complete --------"
         """
       }
+    }
+    stage("static code analisys") {
+      steps{
+        script {
+          def SonarQubecredentialsId = 'sonarqube'
+            staticCodeAnalysis(SonarQubecredentialsId)
+          }
+        }
     }
     stage("building docker image") {
       steps {
