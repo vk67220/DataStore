@@ -46,7 +46,9 @@ pipeline {
     stage("pushing artifacts to jfrog") {
       steps {
         sh """
+          echo "-------- Pushing Artifacts To Jfrog --------"
           curl -X PUT -u $JFROG_CREDENTIALS_USR:$JFROG_CREDENTIALS_PSW -T ./target/datastore-*.jar http://13.232.114.237:8082/artifactory/DataStore/
+          echo "-------- Pushed Artifacts To Jfrog --------"
         """
       }
     }
