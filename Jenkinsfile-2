@@ -15,13 +15,11 @@ pipeline {
         checkout scmGit(branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/shivagande26/DataStore.git']])
       }
     }
-    stage("static code analysys") {
+    stage("static code analisys") {
       steps{
-        script {
-          withSonarQubeEnv(credentialsId: sonarqube) {
-                sh 'mvn sonar:sonar'
-          }
-        }
+        sh """
+          mvn sonar:sonar
+        """
       }
     }
     stage("building application") {
