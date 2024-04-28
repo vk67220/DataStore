@@ -3,6 +3,7 @@ pipeline {
 
   environment {
     DOCKERHUB_CREDENTIALS=credentials("dockerhub")
+    SONARQUBE_CREDENTIALS=credentials("sonarqube")
   }
 
   parameters {
@@ -18,7 +19,7 @@ pipeline {
     stage("static code analisys") {
       steps{
         script {
-          def SonarQubecredentialsId = 'sonarqube'
+          def SonarQubecredentialsId = $SONARQUBE_CREDENTIALS
           staticCodeAnalysis(SonarQubecredentialsId)
         }
       }
