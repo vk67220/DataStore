@@ -4,6 +4,7 @@ pipeline {
   environment {
     DOCKERHUB_CREDENTIALS=credentials("dockerhub")
     SONARQUBE_CREDENTIALS=credentials("sonarqube")
+    JFROG_CREDENTIALS=credentials("jfrog")
   }
 
   parameters {
@@ -41,6 +42,13 @@ pipeline {
             staticCodeAnalysis(SonarQubecredentialsId)
           }
         }
+    }
+    stage("pushing artifacts to jfrog") {
+      steps {
+        sh """
+          curl -X PUT -u $JFROG_CREDENTIALS_USR:$JFROG_CREDENTIALS_PSW -T ./target/datastore-*.jar http://13.232.114.237:8082/artifactory/DataStore/
+        """
+      }
     }
     stage("building docker image") {
       steps {
