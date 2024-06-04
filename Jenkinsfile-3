@@ -1,6 +1,9 @@
 pipeline {
   agent any
 
+  parameters {
+    string(name: "App_Version", description: "provide application version")
+  }
   stages {
     stage("checkout code") {
       steps {
@@ -22,6 +25,15 @@ pipeline {
           echo "-------- Executing Testcases --------"
           mvn test
           echo "-------- Testcases Execution Complete --------"
+        """
+      }
+    }
+    stage("building docker image") {
+      steps {
+        sh """
+          echo "-------- Building Docker Image --------"
+          docker build -t datastore:"${App_Version}" .
+          echo "-------- Image Successfully Built --------"
         """
       }
     }
