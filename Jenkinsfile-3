@@ -1,1 +1,10 @@
+pipeline {
 
+  stages {
+    stage("checkout code") {
+      steps {
+          checkout scmGit(branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/shivagande26/DataStore.git']])
+      }
+    }
+  }
+}
