@@ -6,7 +6,6 @@ pipeline {
   }
   environment {
     DOCKERHUB_CREDENTIALS=credentials("dockerhub")
-    SONARQUBE_CREDENTIALS=credentials("sonarqube")
   }
 
   stages {
@@ -32,14 +31,6 @@ pipeline {
           echo "-------- Testcases Execution Complete --------"
         """
       }
-    }
-    stage("static code analisys") {
-      steps{
-        script {
-          def SonarQubecredentialsId = 'sonarqube'
-            staticCodeAnalysis(SonarQubecredentialsId)
-          }
-        }
     }
     stage("building docker image") {
       steps {
@@ -90,10 +81,5 @@ pipeline {
         """
       }
     }
-  }
-}
-def staticCodeAnalysis(credentialsId) {
-  withSonarQubeEnv(credentialsId: credentialsId) {
-    sh 'mvn sonar:sonar'
   }
 }
