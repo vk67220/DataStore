@@ -33,6 +33,14 @@ pipeline {
         """
       }
     }
+    stage("static code analisys") {
+      steps{
+        script {
+          def SonarQubecredentialsId = 'sonarqube'
+            staticCodeAnalysis(SonarQubecredentialsId)
+          }
+        }
+    }
     stage("building docker image") {
       steps {
         sh """
@@ -82,5 +90,10 @@ pipeline {
         """
       }
     }
+  }
+}
+def staticCodeAnalysis(credentialsId) {
+  withSonarQubeEnv(credentialsId: credentialsId) {
+    sh 'mvn sonar:sonar'
   }
 }
