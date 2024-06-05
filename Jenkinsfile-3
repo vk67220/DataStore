@@ -6,6 +6,7 @@ pipeline {
   }
   environment {
     DOCKERHUB_CREDENTIALS=credentials("dockerhub")
+    SONARQUBE_CREDENTIALS=credentials("sonarqube")
   }
 
   stages {
