@@ -10,8 +10,17 @@ pipeline {
       steps {
         gitCheckout(
           branch: "master",
-          url: "https://github.com/shivakumar26011999/DataStore.git"
+          url: "https://github.com/shivagande26/DataStore.git"
         )
+      }
+    }
+    stage("Maven Build") {
+      steps {
+        sh """
+          echo "-------- Building datastore project --------"
+          mvn clean package
+          echo "-------- Datastore project build successfully --------"
+        """
       }
     }
   }
