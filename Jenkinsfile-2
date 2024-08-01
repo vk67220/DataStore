@@ -73,5 +73,14 @@ pipeline {
         """
       }
     }
+    stage("Clean Up Activities")
+      steps {
+        sh """
+          echo "-------- Removing Unused Images --------"
+          docker image prune -a -f
+          echo "-------- Unused Images Removed Successfully --------"
+        """
+      }
+    }
   }
 }
