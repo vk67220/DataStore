@@ -82,5 +82,12 @@ pipeline {
         """
       }
     }
+    stage("Continue Deployment Acceptance") {
+      steps {
+        script {
+          input "Continue Deployment"
+        }
+      }
+    }
   }
 }
