@@ -42,6 +42,15 @@ pipeline {
         """
       }
     }
+    stage("Scanning Docker Image") {
+      steps {
+        sh """
+          echo "-------- Scanning Docker Image --------"
+          trivy image datastore:"${App_Version}"
+          echo "-------- Scanning Docker Image Complete --------"
+        """
+      }
+    }
     stage("Docker Login") {
       steps {
         sh """
