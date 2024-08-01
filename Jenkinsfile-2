@@ -73,7 +73,7 @@ pipeline {
         """
       }
     }
-    stage("Clean Up Activities")
+    stage("Clean Up Activities") {
       steps {
         sh """
           echo "-------- Removing Unused Images --------"
