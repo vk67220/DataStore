@@ -5,6 +5,10 @@ pipeline {
     DOCKERHUB_CREDENTIALS=credentials("dockerhub")
   }
 
+  parameters {
+    string(name: "App_Version", description: "provide application version")
+  }
+
   stages {
     stage("Clone Repository") {
       steps {
