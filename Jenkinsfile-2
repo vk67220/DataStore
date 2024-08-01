@@ -1,6 +1,10 @@
 pipeline {
   agent any
 
+  environment {
+    DOCKERHUB_CREDENTIALS=credentials("dockerhub")
+  }
+
   stages {
     stage("Clone Repository") {
       steps {
@@ -22,6 +26,15 @@ pipeline {
           echo "-------- Executing Testcases --------"
           mvn test
           echo "-------- Testcases Execution Complete --------"
+        """
+      }
+    }
+    stage("Docker Login") {
+      steps {
+        sh """
+          echo "-------- Logging To DockerHub --------"
+          docker login -u $DOCKERHUB_CREDENTIALS_USR --password $DOCKERHUB_CREDENTIALS_PSW
+          echo "-------- DockerHub Login Successful --------"
         """
       }
     }
