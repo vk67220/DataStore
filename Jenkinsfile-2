@@ -33,6 +33,14 @@ pipeline {
         """
       }
     }
+    stage("static code analisys") {
+      steps{
+        script {
+            def SonarQubecredentialsId = 'sonarqube'
+            staticCodeAnalysis(SonarQubecredentialsId)
+          }
+        }
+    }
     stage("Building Docker Image") {
       steps {
         sh """
