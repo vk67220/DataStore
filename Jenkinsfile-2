@@ -33,7 +33,7 @@ pipeline {
         """
       }
     }
-    stage("static code analisys") {
+    stage("Static Code Analisys") {
       steps{
         script {
             def SonarQubecredentialsId = 'sonarqube'
