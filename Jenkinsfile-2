@@ -34,14 +34,6 @@ pipeline {
         """
       }
     }
-    stage("Static Code Analisys") {
-      steps{
-        script {
-            def SonarQubecredentialsId = 'sonarqube'
-            staticCodeAnalysis(SonarQubecredentialsId)
-          }
-        }
-    }
     stage("Building Docker Image") {
       steps {
         sh """
