@@ -86,7 +86,14 @@ pipeline {
     stage("Continue Deployment Acceptance") {
       steps {
         script {
-          input "Continue Deployment"
+          input {
+            message "Should we continue with deployment?"
+            ok "yes"
+            submitter "shiva"
+            parameters {
+              string(name: "Service Name", defaultValue: "Datastore", description: "Provide the service name.")
+            }
+          }
         }
       }
     }
