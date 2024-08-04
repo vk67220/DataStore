@@ -37,10 +37,12 @@ pipeline {
     stage("Static Code Analisys") {
       steps{
         script {
-          def SonarQubecredentialsId = 'sonarqube'
-            staticCodeAnalysis(SonarQubecredentialsId)
-          }
+         def scannerHome = tool 'SonarQube Scanner'
+         withSonarQubeEnv('SonarQubeServerName') {
+           sh "${scannerHome}/bin/sonar-scanner"
+         }
         }
+      }
     }
     stage("Building Docker Image") {
       steps {
