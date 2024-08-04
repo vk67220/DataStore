@@ -96,7 +96,7 @@ pipeline {
     }
     stage("Continue Deployment Acceptance") {
       when {
-        branch 'master'
+        branch 'develop'
       }
       steps {
         input "Continue Deployment?"
