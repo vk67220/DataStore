@@ -94,19 +94,6 @@ pipeline {
         """
       }
     }
-    stage('Example') {
-            input {
-                message "Should we continue?"
-                ok "Yes, we should."
-                submitter "shiva,bob"
-                parameters {
-                    string(name: 'PERSON', defaultValue: 'Mr Jenkins', description: 'Who should I say hello to?')
-                }
-            }
-            steps {
-                echo "Hello, ${PERSON}, nice to meet you."
-            }
-        }
     stage("Continue Deployment Acceptance") {
       steps {
         input "Continue Deployment?"
