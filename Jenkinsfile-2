@@ -99,6 +99,11 @@ pipeline {
         input "Continue Deployment?"
       }
     }
+    stage("triggering deployment job") {
+      steps {
+        build job: "app-deploy", parameters: [string(name: "App_Name", value: "datastore-deploy"), string(name: "App_Version", value: "${params.App_Version}")]
+      }
+    }
   }
   post {
     always {
