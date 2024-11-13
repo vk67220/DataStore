@@ -1,1 +1,15 @@
+pipeline {
+  agent any
 
+  parameters {
+    string(name: "App_Version", description: "provide application version")
+  }
+
+  stages {
+    stage("Checkout Stage") {
+      steps{
+        checkout scmGit(branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/shivagande26/DataStore.git']])
+      }
+    }
+  }
+}
