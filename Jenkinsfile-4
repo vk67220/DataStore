@@ -7,6 +7,7 @@ pipeline {
 
   environment {
     DOCKERHUB_CREDENTIALS=credentials("dockerhub")
+    SONARQUBE_CREDENTIALS=credentials("sonarqube")
   }
 
   stages {
@@ -32,6 +33,14 @@ pipeline {
           echo "-------- Testcases Execution Complete --------"
         """
       }
+    }
+    stage("static code analisys") {
+      steps{
+        script {
+            def SonarQubecredentialsId = 'sonarqube'
+            staticCodeAnalysis(SonarQubecredentialsId)
+          }
+        }
     }
     stage("Pushing Artifacts To S3") {
       steps {
@@ -101,5 +110,11 @@ pipeline {
         build job: "KubernetesDeployment", parameters: [string(name: "App_Name", value: "datastore-deploy"), string(name: "App_Version", value: "${params.App_Version}")]
       }
     }
+  }
+}
+
+def staticCodeAnalysis(credentialsId) {
+  withSonarQubeEnv(credentialsId: credentialsId) {
+    sh 'mvn sonar:sonar'
   }
 }
