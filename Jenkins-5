@@ -19,7 +19,7 @@ pipeline {
       steps {
         sh """
           echo "-------- Executing Unit Testcases --------"
-          mvn test
+          ./mvnw test
           echo "-------- Testcases Execution Complete --------"
         """
       }
