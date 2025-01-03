@@ -10,7 +10,7 @@ pipeline {
       steps {
         sh """
           echo "-------- Executing Maven Build --------"
-          mvn clean package
+          ./mvnw clean package
           echo "-------- Application Build Complete --------"
         """
       }
