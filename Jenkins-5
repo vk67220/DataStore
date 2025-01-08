@@ -37,8 +37,9 @@ pipeline {
     stage("static code analisys") {
       steps{
         script {
-            def SonarQubecredentialsId = 'sonarqube'
-            staticCodeAnalysis(SonarQubecredentialsId)
+            withSonarQubeEnv('sonar') {
+              sh "mvn sonar:sonar"
+            }
           }
         }
     }
